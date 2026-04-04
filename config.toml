@@ -1,6 +1,6 @@
 # ============= 开发者选项 / Developer Options ===============
 [developer]
-developer_mode = true
+developer_mode = false
 print_context = false # 在拦截器打印模型拿到的全部上下文，会很长 / Print full context in interceptor (output will be very long)
 
 # ============= 项目路径 / Project Paths ======================
