@@ -1,13 +1,12 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)" />
-  <title>ReelForge</title>
-  <link rel="icon" type="image/png" href="/static/logo.png">
+  <title>ai-video-editor</title>
   <link rel="stylesheet" href="/static/style.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
@@ -16,13 +15,13 @@
 <body class="sidebar-collapsed devbar-collapsed">
 
     <aside id="sidebar" class="sidebar collapsed"
-            aria-label="Panel lateral"
+            aria-label="Sidebar"
             data-i18n-aria-label="aria.sidebar">
     <div class="sidebar-inner">
       <div class="sidebar-top">
         <button id="sidebarToggle" class="sidebar-icon-btn"
-                title="Colapsar/expandir panel lateral"
-                aria-label="Colapsar/expandir panel lateral"
+                title="Collapse/expand sidebar"
+                aria-label="Collapse/expand sidebar"
                 data-i18n-title="sidebar.toggle"
                 data-i18n-aria-label="sidebar.toggle">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -33,29 +32,29 @@
         </button>
 
         <button id="createDialogBtn" class="sidebar-action primary"
-                title="Crear nueva conversación"
-                aria-label="Crear nueva conversación"
+                title="Create new chat"
+                aria-label="Create new chat"
                 data-i18n-title="sidebar.new_chat"
                 data-i18n-aria-label="sidebar.new_chat">
           <span class="sidebar-action-icon">＋</span>
-          <span class="sidebar-action-text" data-i18n="sidebar.new_chat">Nueva conversación</span>
+          <span class="sidebar-action-text" data-i18n="sidebar.new_chat">New chat</span>
         </button>
       </div>
 
       <div class="sidebar-scroll" id="sidebarScroll"
-          aria-label="Zona de scroll del panel"
+          aria-label="Sidebar scroll area"
           data-i18n-aria-label="aria.sidebar_scroll">
-        <div id="sessionHistoryPanel" class="sidebar-panel" aria-label="Historial de conversaciones"
+        <div id="sessionHistoryPanel" class="sidebar-panel" aria-label="Chat history list"
              data-i18n-aria-label="sidebar.history_aria">
           <div class="sidebar-panel-title">
-            <span class="sidebar-panel-title-text" data-i18n="sidebar.history_title">Historial</span>
+            <span class="sidebar-panel-title-text" data-i18n="sidebar.history_title">History</span>
           </div>
           <div id="sessionHistoryList" class="session-history-list">
           </div>
         </div>
-        <div id="llmBox" class="sidebar-panel" aria-label="Configuración LLM">
+        <div id="llmBox" class="sidebar-panel" aria-label="LLM Configuration">
           <div class="sidebar-panel-title">
-            <span class="sidebar-panel-title-text" data-i18n="sidebar.llm_label">Modelo LLM</span>
+            <span class="sidebar-panel-title-text" data-i18n="sidebar.llm_label">LLM Model</span>
 
             <a class="sidebar-help"
               href="https://github.com/FireRedTeam/FireRed-OpenStoryline/blob/main/docs/source/en/api-key.md"
@@ -66,13 +65,13 @@
               <span class="sidebar-help-icon" aria-hidden="true">?</span>
               <span class="sidebar-help-tooltip" role="tooltip">
                 <span class="sidebar-help-tooltip-body" data-i18n="sidebar.help.llm"></span>
-                <span class="sidebar-help-tooltip-cta" data-i18n="sidebar.help.cta">Ver tutorial de configuración</span>
+                <span class="sidebar-help-tooltip-cta" data-i18n="sidebar.help.cta">Click to view the configuration guide</span>
               </span>
             </a>
           </div>
 
           <select id="llmModelSelect" class="sidebar-model-select"
-                  aria-label="Seleccionar modelo LLM"
+                  aria-label="Select LLM model"
                   data-i18n-aria-label="sidebar.llm_select_aria"
                   data-os-persist="sidebar.llm_model"></select>
 
@@ -81,12 +80,12 @@
 
             <input id="customLlmModel" class="sidebar-input"
                   data-os-persist="sidebar.custom.llm.model"
-                  placeholder="Nombre del modelo, ej. gpt-4o-mini"
+                  placeholder="Model name, e.g. gpt-4o-mini"
                   data-i18n-placeholder="sidebar.custom_llm_model_ph" />
 
             <input id="customLlmBaseUrl" class="sidebar-input"
                   data-os-persist="sidebar.custom.llm.base_url"
-                  placeholder="Base URL, ej. https://api.ejemplo.com/v1"
+                  placeholder="Base URL, e.g. https://api.xxx.com/v1"
                   data-i18n-placeholder="sidebar.custom_llm_baseurl_ph" />
 
             <input id="customLlmApiKey" class="sidebar-input" type="password"
@@ -95,14 +94,14 @@
                   data-i18n-placeholder="sidebar.custom_llm_apikey_ph" autocomplete="off" />
 
             <div class="sidebar-hint" data-i18n="sidebar.custom_hint">
-              Nota: La API Key solo se usa para llamadas del servidor en esta sesión; la página y el registro de herramientas la ocultan automáticamente.
+              Note: API keys are used only for server-side calls in this session.
             </div>
           </div>
         </div>
 
-        <div id="vlmBox" class="sidebar-panel" aria-label="Configuración VLM">
+        <div id="vlmBox" class="sidebar-panel" aria-label="VLM Configuration">
           <div class="sidebar-panel-title">
-            <span class="sidebar-panel-title-text" data-i18n="sidebar.vlm_label">Modelo VLM</span>
+            <span class="sidebar-panel-title-text" data-i18n="sidebar.vlm_label">VLM Model</span>
 
             <a class="sidebar-help"
               href="https://github.com/FireRedTeam/FireRed-OpenStoryline/blob/main/docs/source/en/api-key.md"
@@ -113,13 +112,13 @@
               <span class="sidebar-help-icon" aria-hidden="true">?</span>
               <span class="sidebar-help-tooltip" role="tooltip">
                 <span class="sidebar-help-tooltip-body" data-i18n="sidebar.help.vlm"></span>
-                <span class="sidebar-help-tooltip-cta" data-i18n="sidebar.help.cta">Ver tutorial de configuración</span>
+                <span class="sidebar-help-tooltip-cta" data-i18n="sidebar.help.cta">Click to view the configuration guide</span>
               </span>
             </a>
           </div>
 
           <select id="vlmModelSelect" class="sidebar-model-select"
-                  aria-label="Seleccionar modelo VLM"
+                  aria-label="Select VLM model"
                   data-i18n-aria-label="sidebar.vlm_select_aria"
                   data-os-persist="sidebar.vlm_model"></select>
 
@@ -128,12 +127,12 @@
 
             <input id="customVlmModel" class="sidebar-input"
                   data-os-persist="sidebar.custom.vlm.model"
-                  placeholder="Nombre del modelo, ej. gpt-4o"
+                  placeholder="Model name, e.g. gpt-4o"
                   data-i18n-placeholder="sidebar.custom_vlm_model_ph" />
 
             <input id="customVlmBaseUrl" class="sidebar-input"
                   data-os-persist="sidebar.custom.vlm.base_url"
-                  placeholder="Base URL, ej. https://api.ejemplo.com/v1"
+                  placeholder="Base URL, e.g. https://api.xxx.com/v1"
                   data-i18n-placeholder="sidebar.custom_vlm_baseurl_ph" />
 
             <input id="customVlmApiKey" class="sidebar-input" type="password"
@@ -142,13 +141,13 @@
                   data-i18n-placeholder="sidebar.custom_vlm_apikey_ph" autocomplete="off" />
 
             <div class="sidebar-hint" data-i18n="sidebar.custom_hint">
-              Nota: La API Key solo se usa para llamadas del servidor en esta sesión; la página y el registro de herramientas la ocultan automáticamente.
+              Note: API keys are used only for server-side calls in this session.
             </div>
           </div>
         </div>
 
         <div id="pexelsBox" class="sidebar-panel"
-            aria-label="Configuración de Pexels"
+            aria-label="Pexels configuration"
             data-i18n-aria-label="sidebar.pexels_box_aria">
           <div class="sidebar-panel-title">
             <span class="sidebar-panel-title-text" data-i18n="sidebar.pexels_title">Pexels</span>
@@ -179,18 +178,18 @@
                     data-terms-en="https://www.pexels.com/terms-of-service"
                     data-i18n="sidebar.help.pexels_terms_link"
                   >Ver términos de uso de Pexels</span>
-                <span class="sidebar-help-tooltip-cta" data-i18n="sidebar.help.cta">Ver tutorial de configuración</span>
+                <span class="sidebar-help-tooltip-cta" data-i18n="sidebar.help.cta">Click to view the configuration guide</span>
               </span>
             </a>
           </div>
 
           <select id="pexelsKeyModeSelect"
                   class="sidebar-model-select"
-                  aria-label="Modo de clave Pexels"
+                  aria-label="Select Pexels key mode"
                   data-i18n-aria-label="sidebar.pexels_mode_select_aria"
                   data-os-persist="sidebar.pexels.mode">
-            <option value="default" data-i18n="sidebar.pexels_default">Usar configuración predeterminada</option>
-            <option value="custom" data-i18n="sidebar.pexels_custom">Usar clave personalizada</option>
+            <option value="default" data-i18n="sidebar.pexels_default">Use default configuration</option>
+            <option value="custom" data-i18n="sidebar.pexels_custom">Use custom key</option>
           </select>
 
           <div id="pexelsCustomKeyBox" class="hidden">
@@ -204,15 +203,15 @@
           </div>
 
           <div class="sidebar-hint" data-i18n="sidebar.pexels_hint">
-            Nota: La configuración predeterminada prioriza search_media.pexels_api_key del config.toml; si está vacío, se lee desde la variable de entorno.
+            Note: default mode prefers config.toml (search_media.pexels_api_key). If empty, falls back to environment variables.
           </div>
         </div>
 
         <div id="ttsBox" class="sidebar-panel"
-            aria-label="Configuración de TTS"
+            aria-label="TTS configuration"
             data-i18n-aria-label="sidebar.tts_box_aria">
           <div class="sidebar-panel-title">
-            <span class="sidebar-panel-title-text" data-i18n="sidebar.tts_title">Texto a voz (TTS)</span>
+            <span class="sidebar-panel-title-text" data-i18n="sidebar.tts_title">TTS</span>
 
             <a class="sidebar-help"
               href="https://github.com/FireRedTeam/FireRed-OpenStoryline/blob/main/docs/source/en/api-key.md"
@@ -223,17 +222,17 @@
               <span class="sidebar-help-icon" aria-hidden="true">?</span>
               <span class="sidebar-help-tooltip" role="tooltip">
                 <span class="sidebar-help-tooltip-body" data-i18n="sidebar.help.tts"></span>
-                <span class="sidebar-help-tooltip-cta" data-i18n="sidebar.help.cta">Ver tutorial de configuración</span>
+                <span class="sidebar-help-tooltip-cta" data-i18n="sidebar.help.cta">Click to view the configuration guide</span>
               </span>
             </a>
           </div>
 
           <select id="ttsProviderSelect"
                   class="sidebar-model-select"
-                  aria-label="Seleccionar proveedor TTS"
+                  aria-label="Select TTS provider"
                   data-i18n-aria-label="sidebar.tts_provider_select_aria"
                   data-os-persist="sidebar.tts.provider">
-            <option value="" data-i18n="sidebar.tts_default">Usar configuración predeterminada</option>
+            <option value="" data-i18n="sidebar.tts_default">Use default configuration</option>
           </select>
 
           <div class="sidebar-hint" data-i18n="sidebar.tts_hint">
@@ -244,10 +243,10 @@
         </div>
 
         <div id="aiTransitionBox" class="sidebar-panel"
-            aria-label="Configuración de transiciones IA"
+            aria-label="AI transition configuration"
             data-i18n-aria-label="sidebar.ai_transition_box_aria">
           <div class="sidebar-panel-title">
-            <span class="sidebar-panel-title-text" data-i18n="sidebar.ai_transition_title">Transiciones IA</span>
+            <span class="sidebar-panel-title-text" data-i18n="sidebar.ai_transition_title">AI Transition</span>
 
             <a class="sidebar-help"
               href="https://github.com/FireRedTeam/FireRed-OpenStoryline/blob/main/docs/source/en/api-key.md"
@@ -258,25 +257,25 @@
               <span class="sidebar-help-icon" aria-hidden="true">?</span>
               <span class="sidebar-help-tooltip" role="tooltip">
                 <span class="sidebar-help-tooltip-body" data-i18n="sidebar.help.ai_transition"></span>
-                <span class="sidebar-help-tooltip-cta" data-i18n="sidebar.help.cta">Ver tutorial de configuración</span>
+                <span class="sidebar-help-tooltip-cta" data-i18n="sidebar.help.cta">Click to view the configuration guide</span>
               </span>
             </a>
           </div>
 
           <select id="aiTransitionProviderSelect"
                   class="sidebar-model-select"
-                  aria-label="Seleccionar proveedor de transiciones IA"
+                  aria-label="Select AI transition provider"
                   data-i18n-aria-label="sidebar.ai_transition_provider_select_aria"
                   data-os-persist="sidebar.ai_transition.provider"></select>
 
           <div class="sidebar-hint" data-i18n="sidebar.ai_transition_hint">
-            Nota: Si los campos están incompletos, se usará la configuración de config.toml.
+            Note: If fields are incomplete, config.toml settings will be used.
           </div>
 
           <div class="sidebar-warning" role="note" data-i18n-aria-label="sidebar.ai_transition_warning_aria">
-            <span class="sidebar-warning-title" data-i18n="sidebar.ai_transition_warning_title">Alto consumo de recursos</span>
+            <span class="sidebar-warning-title" data-i18n="sidebar.ai_transition_warning_title">Higher resource usage</span>
             <span class="sidebar-warning-body" data-i18n="sidebar.ai_transition_warning_body">
-              Las transiciones IA requieren llamadas adicionales al modelo. El consumo de recursos suele ser significativamente mayor que en los procesos de guion o locución. Se recomienda usarlas solo cuando sea necesario.
+              AI transitions trigger additional model calls and usually consume significantly more resources than regular copywriting or voiceover workflows. Use only when necessary.
             </span>
           </div>
 
@@ -290,63 +289,10 @@
   <div class="main">
     <header class="topbar">
       <div class="brand">
-        <picture>
-          <source srcset="/static/brand_black.png" media="(prefers-color-scheme: dark)">
-          <img class="brand-img" src="/static/brand_white.png" alt="ReelForge" width="168" height="26" decoding="async">
-        </picture>
         <span class="ver">v1.0.0</span>
       </div>
 
       <div class="actions">
-        <div class="topbar-links" aria-label="Enlaces rápidos">
-          <a
-            class="topbar-pill topbar-link"
-            href="https://github.com/FireRedTeam/FireRed-OpenStoryline"
-            data-link-zh="https://github.com/FireRedTeam/FireRed-OpenStoryline"
-            data-link-en="https://github.com/FireRedTeam/FireRed-OpenStoryline"
-            target="_blank" rel="noopener noreferrer"
-            data-i18n-title="topbar.link1"
-            data-i18n-aria-label="topbar.link1"
-          >
-            <img class="os-icon" src="/static/github.png" alt="" />
-            <span class="topbar-pill-text">Github</span>
-          </a>
-
-          <a
-            class="topbar-pill topbar-link"
-            href="https://github.com/FireRedTeam/FireRed-OpenStoryline/blob/main/docs/source/en/guide.md"
-            data-link-zh="https://github.com/FireRedTeam/FireRed-OpenStoryline/blob/main/docs/source/zh/guide.md"
-            data-link-en="https://github.com/FireRedTeam/FireRed-OpenStoryline/blob/main/docs/source/en/guide.md"
-            target="_blank" rel="noopener noreferrer"
-            data-i18n-title="topbar.link2"
-            data-i18n-aria-label="topbar.link2"
-          >
-            <img class="os-icon" src="/static/user_guide.png" alt="" />
-            <span class="topbar-pill-text">Docs</span>
-          </a>
-
-          <a
-            class="topbar-pill topbar-link"
-            href="/node-map"
-            data-link-suffix="/node-map"
-            target="_blank" rel="noopener noreferrer"
-            data-i18n-title="topbar.node_map"
-            data-i18n-aria-label="topbar.node_map"
-          >
-            <img class="os-icon" src="/static/node_map.png" alt="" />
-            <span class="topbar-pill-text">Mapa de nodos</span>
-          </a>
-        </div>
-        <div class="lang-switch" data-i18n-aria-label="topbar.lang_aria">
-          <span class="lang-chip lang-zh" data-i18n="topbar.lang_zh">ES</span>
-
-          <label class="lang-toggle" data-i18n-title="topbar.lang_title">
-            <input id="langToggle" type="checkbox" data-i18n-aria-label="topbar.lang_aria" />
-            <span class="lang-slider"></span>
-          </label>
-
-          <span class="lang-chip lang-en" data-i18n="topbar.lang_en">EN</span>
-        </div>
       </div>
     </header>
 
@@ -354,22 +300,22 @@
     <main id="chat" class="chat" aria-live="polite"></main>
 
     <section id="hero" class="hero" aria-hidden="true">
-      <h1 id="greeting" class="hero-title" data-i18n="main.greeting">Hola, creador</h1>
+      <h1 id="greeting" class="hero-title" data-i18n="main.greeting">Hi, creator</h1>
     </section>
 
     <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
-    <button id="scrollToBottomBtn" class="scroll-bottom hidden" aria-label="Desplazarse al final" title="Desplazarse al final">
+    <button id="scrollToBottomBtn" class="scroll-bottom hidden" aria-label="Scroll to bottom" title="Scroll to bottom">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 5v14"></path>
         <path d="M7 14l5 5 5-5"></path>
       </svg>
     </button>
 
-    <footer class="composer" role="region" aria-label="Zona de entrada de mensajes">
+    <footer class="composer" role="region" aria-label="Message input area">
       <input id="fileInput" class="file-input" type="file" multiple />
 
-      <div id="pendingBar" class="pending hidden" aria-label="Material pendiente de envío">
-        <div class="media-bar-title">Material por enviar</div>
+      <div id="pendingBar" class="pending hidden" aria-label="Pending media to send">
+        <div class="media-bar-title">Pending media</div>
         <div id="pendingRow" class="media-row"></div>
       </div>
 
@@ -378,12 +324,12 @@
           id="promptInput"
           class="prompt"
           data-i18n-placeholder="composer.placeholder"
-          placeholder="Escribe tu instrucción de edición aquí..."
+          placeholder="Make any editing requests..."
         ></textarea>
       </div>
 
       <div class="composer-actions">
-        <button id="uploadBtn" class="icon-btn" title="Subir material" aria-label="Subir material">
+        <button id="uploadBtn" class="icon-btn" title="Upload media" aria-label="Upload media">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
           </svg>
@@ -401,7 +347,7 @@
           <img class="os-icon" src="/static/dice.png" alt="" decoding="async" />
         </button>
 
-        <button id="sendBtn" class="send-btn" aria-label="Enviar">
+        <button id="sendBtn" class="send-btn" aria-label="Send">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 19V6"></path>
             <path d="M7 11l5-5 5 5"></path>
@@ -414,40 +360,40 @@
     <div id="modal" class="modal hidden" aria-hidden="true">
       <div class="modal-backdrop" id="modalBackdrop"></div>
       <div class="modal-body" role="dialog" aria-modal="true">
-        <button class="modal-close" id="modalClose" aria-label="Cerrar">×</button>
+        <button class="modal-close" id="modalClose" aria-label="Close">×</button>
         <div class="modal-content" id="modalContent"></div>
       </div>
     </div>
     <script>
       window.OPENSTORYLINE_TOOL_UI = {
         labels: {
-          "load_media": {"zh": "Cargar material", "en": "load media"},
-          "search_media": {"zh": "Buscar material", "en": "search media"},
-          "split_shots": {"zh": "Dividir planos", "en": "split shots"},
-          "local_asr": {"zh": "Reconocimiento de voz local", "en": "local ASR"},
-          "speech_rough_cut": {"zh": "Corte preliminar por voz", "en": "speech rough cut"},
-          "filter_clips": {"zh": "Filtrar fragmentos", "en": "filter clips"},
-          "understand_clips": {"zh": "Analizar material", "en": "understand clips"},
-          "group_clips": {"zh": "Agrupar fragmentos", "en": "group clips"},
-          "generate_ai_transition": {"zh": "Transición IA", "en": "AI transition"},
-          "script_template_rec":{"zh": "Recomendar plantilla de guion", "en": "recommend script template"},
-          "default_editing_workflow_skill": {"zh": "[SKILL] Edición general", "en": "[SKILL] general editing SKILL"},
-          "create_profile_style_skill": {"zh": "[SKILL] Generar nuevo SKILL", "en": "[SKILL] generate a new SKILL"},
-          "subtitle_imitation_skill": {"zh": "[SKILL] Imitar estilo de guion", "en": "[SKILL] mimic script style"},
-          "speech_rough_cut_skill": {"zh": "[SKILL] Corte preliminar de locución", "en": "[SKILL] speech rough cut"},
-          "ai_transition_editing_skill": {"zh": "[SKILL] Edición con transiciones IA", "en": "[SKILL] AI transition editing"},
-          "generate_script": {"zh": "Generar guion", "en": "generate script"},
-          "generate_voiceover": {"zh": "Generar locución", "en": "generate voiceover"},
-          "select_bgm": {"zh": "Recomendar música de fondo", "en": "recommend music"},
-          "elementrec_transition": {"zh": "Recomendar transición", "en": "recommend transition"},
-          "elementrec_text":{"zh": "Recomendar fuente de subtítulos", "en": "recommend stylized subtitle fonts"},
-          "plan_timeline": {"zh": "Organizar línea de tiempo", "en": "plan timeline"},
-          "plan_timeline_pro": {"zh": "Organizar línea de tiempo (pro)", "en": "plan timeline (pro)"},
-          "plan_timeline_ai_transition": {"zh": "Organizar línea de tiempo (trans. IA)", "en": "plan timeline (AI transition)"},
-          "render_video": {"zh": "Renderizar video", "en": "render"},
-          "write_skills": {"zh": "Crear nuevo SKILL", "en": "Create a new SKILL"},
+          "load_media": {"zh": "load media", "en": "load media"},
+          "search_media": {"zh": "search media", "en": "search media"},
+          "split_shots": {"zh": "split shots", "en": "split shots"},
+          "local_asr": {"zh": "local ASR", "en": "local ASR"},
+          "speech_rough_cut": {"zh": "speech rough cut", "en": "speech rough cut"},
+          "filter_clips": {"zh": "filter clips", "en": "filter clips"},
+          "understand_clips": {"zh": "understand clips", "en": "understand clips"},
+          "group_clips": {"zh": "group clips", "en": "group clips"},
+          "generate_ai_transition": {"zh": "AI transition", "en": "AI transition"},
+          "script_template_rec":{"zh": "recommend script template", "en": "recommend script template"},
+          "default_editing_workflow_skill": {"zh": "[SKILL] general editing SKILL", "en": "[SKILL] general editing SKILL"},
+          "create_profile_style_skill": {"zh": "[SKILL] generate a new SKILL", "en": "[SKILL] generate a new SKILL"},
+          "subtitle_imitation_skill": {"zh": "[SKILL] mimic script style", "en": "[SKILL] mimic script style"},
+          "speech_rough_cut_skill": {"zh": "[SKILL] speech rough cut", "en": "[SKILL] speech rough cut"},
+          "ai_transition_editing_skill": {"zh": "[SKILL] AI transition editing", "en": "[SKILL] AI transition editing"},
+          "generate_script": {"zh": "generate script", "en": "generate script"},
+          "generate_voiceover": {"zh": "generate voiceover", "en": "generate voiceover"},
+          "select_bgm": {"zh": "recommend music", "en": "recommend music"},
+          "elementrec_transition": {"zh": "recommend transition", "en": "recommend transition"},
+          "elementrec_text":{"zh": "recommend stylized subtitle fonts", "en": "recommend stylized subtitle fonts"},
+          "plan_timeline": {"zh": "plan timeline", "en": "plan timeline"},
+          "plan_timeline_pro": {"zh": "plan timeline (pro)", "en": "plan timeline (pro)"},
+          "plan_timeline_ai_transition": {"zh": "plan timeline (AI transition)", "en": "plan timeline (AI transition)"},
+          "render_video": {"zh": "render", "en": "render"},
+          "write_skills": {"zh": "Create a new SKILL", "en": "Create a new SKILL"},
 
-          "read_node_history": {"zh": "Leer resultados detallados", "en": "read history"},
+          "read_node_history": {"zh": "read history", "en": "read history"},
         },
         estimates_ms: {
           "storyline.load_media": 1000
@@ -463,18 +409,18 @@
     <script type="module" src="/static/app.js"></script>
   </div>
 
-  <aside id="devbar" class="devbar hidden collapsed" aria-label="Panel de desarrollador">
+  <aside id="devbar" class="devbar hidden collapsed" aria-label="Developer panel">
     <div class="devbar-inner">
-      <button id="devbarToggle" class="devbar-icon-btn" title="Colapsar/expandir panel de desarrollador" aria-label="Colapsar/expandir panel de desarrollador">
+      <button id="devbarToggle" class="devbar-icon-btn" title="Collapse/expand developer panel" aria-label="Collapse/expand developer panel">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M15 6l-6 6 6 6"></path>
         </svg>
       </button>
 
-      <div class="devbar-title">Registro de herramientas</div>
+      <div class="devbar-title">Tool Log</div>
       <div class="devbar-sid" id="sidebarSid"></div>
 
-      <div id="devLog" class="devbar-log" aria-label="Resumen de herramientas">
+      <div id="devLog" class="devbar-log" aria-label="Tool Summary">
       </div>
     </div>
   </aside>

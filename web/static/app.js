@@ -23,126 +23,126 @@ const QUICK_PROMPTS = [
 const __OS_I18N = {
   zh: {
     // topbar
-    "main.greeting": "🎬 Hola, creador",
-    "topbar.lang_title": "Cambiar idioma",
-    "topbar.lang_aria": "Selector de idioma",
-    "topbar.lang_zh": "ES",
+    "main.greeting": "🎬 Hi, creator",
+    "topbar.lang_title": "Switch language",
+    "topbar.lang_aria": "Language switch",
+    "topbar.lang_zh": "EN",
     "topbar.lang_en": "EN",
-    "topbar.link1": "Enlace a GitHub",
-    "topbar.link2": "Guía de uso",
-    "topbar.node_map": "Mapa de nodos",
+    "topbar.link1": "github link",
+    "topbar.link2": "user guide",
+    "topbar.node_map": "node map",
 
     // aria
-    "aria.sidebar": "Panel lateral",
-    "aria.sidebar_scroll": "Zona de scroll del panel",
-    "aria.sidebar_model_select": "Selector de modelo de conversación",
-    "composer.placeholder": "Escribe cualquier instrucción de edición (Enter para enviar, Shift + Enter para nueva línea)",
-    "assistant.placeholder": "Llamando al modelo de lenguaje…",
-    "composer.quick_prompt": "Insertar sugerencia",
+    "aria.sidebar": "Sidebar",
+    "aria.sidebar_scroll": "Sidebar scroll area",
+    "aria.sidebar_model_select": "Chat model selector",
+    "composer.placeholder": "Make any editing requests (Enter to send, Shift + Enter for line break)",
+    "assistant.placeholder": "Calling the LLM…",
+    "composer.quick_prompt": "Insert a preset prompt",
 
     // sidebar
-    "sidebar.toggle": "Colapsar/expandir panel lateral",
-    "sidebar.new_chat": "Nueva conversación",
-    "sidebar.history_title": "Historial",
-    "sidebar.history_empty": "No hay conversaciones anteriores",
-    "sidebar.history_aria": "Lista de historial de conversaciones",
-    "sidebar.model_label": "Modelo de conversación",
-    "sidebar.model_select_aria": "Seleccionar modelo de conversación",
-    "sidebar.custom_model_box_aria": "Configuración de modelo personalizado",
-    "sidebar.custom_model_title": "Modelo personalizado",
-    "sidebar.custom_llm_subtitle": "LLM (conversación/guion)",
-    "sidebar.custom_llm_model_ph": "Nombre del modelo, ej. gpt-4o-mini",
-    "sidebar.custom_llm_baseurl_ph": "Base URL, ej. https://api.ejemplo.com/v1",
-    "sidebar.custom_llm_apikey_ph": "API Key",
-    "sidebar.custom_vlm_subtitle": "VLM (comprensión de material)",
-    "sidebar.custom_vlm_model_ph": "Nombre del modelo, ej. gpt-4o",
-    "sidebar.custom_vlm_baseurl_ph": "Base URL, ej. https://api.ejemplo.com/v1",
-    "sidebar.custom_vlm_apikey_ph": "API Key",
-    "sidebar.custom_hint": "Nota: La API Key solo se usa para llamadas del servidor en esta sesión; la página y el registro de herramientas la ocultan automáticamente.",
-    "sidebar.tts_box_aria": "Configuración de TTS",
-    "sidebar.tts_title": "Texto a voz (TTS)",
-    "sidebar.tts_provider_select_aria": "Seleccionar proveedor TTS",
-    "sidebar.tts_default": "Usar configuración predeterminada",
-    "sidebar.tts_hint": "Nota: Si los campos están vacíos, se usará la configuración de config.toml.",
-    "sidebar.tts_field_suffix": " (vacío = usar predeterminado del servidor)",
-    "sidebar.ai_transition_box_aria": "Configuración de transiciones IA",
-    "sidebar.ai_transition_title": "Transiciones IA",
-    "sidebar.ai_transition_provider_select_aria": "Seleccionar proveedor de transiciones IA",
-    "sidebar.ai_transition_default": "Usar configuración predeterminada",
-    "sidebar.ai_transition_hint": "Nota: Si los campos están incompletos, se usará la configuración de config.toml.",
-    "sidebar.ai_transition_warning_aria": "Aviso de consumo de recursos de transiciones IA",
-    "sidebar.ai_transition_warning_title": "Alto consumo de recursos",
-    "sidebar.ai_transition_warning_body": "Las transiciones IA requieren llamadas adicionales al modelo. El consumo de recursos suele ser significativamente mayor que en los procesos de guion o locución. Se recomienda usarlas solo cuando sea necesario.",
-    "sidebar.use_custom_model": "Usar modelo personalizado",
-    "sidebar.llm_label": "Modelo LLM",
-    "sidebar.vlm_label": "Modelo VLM",
-    "sidebar.llm_select_aria": "Seleccionar modelo LLM",
-    "sidebar.vlm_select_aria": "Seleccionar modelo VLM",
-    "sidebar.custom_llm_title": "LLM personalizado",
-    "sidebar.custom_vlm_title": "VLM personalizado",
-    "sidebar.custom_llm_box_aria": "Configuración de LLM personalizado",
-    "sidebar.custom_vlm_box_aria": "Configuración de VLM personalizado",
+    "sidebar.toggle": "Collapse/expand sidebar",
+    "sidebar.new_chat": "New chat",
+    "sidebar.history_title": "History",
+    "sidebar.history_empty": "No past chats yet",
+    "sidebar.history_aria": "Chat history list",
+    "sidebar.model_label": "Chat model",
+    "sidebar.model_select_aria": "Select chat model",
+    "sidebar.custom_model_box_aria": "Custom model settings",
+    "sidebar.custom_model_title": "Custom model",
+    "sidebar.custom_llm_subtitle": "LLM (chat/copywriting)",
+    "sidebar.custom_llm_model_ph": "Model name, e.g. deepseek-chat / gpt-4o-mini",
+    "sidebar.custom_llm_baseurl_ph": "Base URL, e.g. https://api.xxx.com/v1",
+    "sidebar.custom_llm_apikey_ph": "API key",
+    "sidebar.custom_vlm_subtitle": "VLM (media understanding)",
+    "sidebar.custom_vlm_model_ph": "Model name, e.g. qwen-vl-plus / gpt-4o",
+    "sidebar.custom_vlm_baseurl_ph": "Base URL, e.g. https://api.xxx.com/v1",
+    "sidebar.custom_vlm_apikey_ph": "API key",
+    "sidebar.custom_hint": "Note: API keys are used only for server-side calls in this session. They are masked in the UI and tool trace.",
+    "sidebar.tts_box_aria": "TTS configuration",
+    "sidebar.tts_title": "TTS",
+    "sidebar.tts_provider_select_aria": "Select a TTS provider",
+    "sidebar.tts_default": "Use default configuration",
+    "sidebar.tts_hint": "Note: leaving fields empty will fall back to config.toml.",
+    "sidebar.tts_field_suffix": " (leave empty to use server default)",
+    "sidebar.ai_transition_box_aria": "AI transition configuration",
+    "sidebar.ai_transition_title": "AI transition",
+    "sidebar.ai_transition_provider_select_aria": "Select an AI transition provider",
+    "sidebar.ai_transition_default": "Use default configuration",
+    "sidebar.ai_transition_hint": "Note: leaving fields empty will fall back to config.toml.",
+    "sidebar.ai_transition_warning_aria": "AI transition resource usage notice",
+    "sidebar.ai_transition_warning_title": "Higher resource usage",
+    "sidebar.ai_transition_warning_body": "AI transitions trigger additional model calls and usually consume significantly more resources than regular copywriting or voiceover workflows. The price for a single transition is typically between $0.1 and $0.5. We recommend using as needed.",
+    "sidebar.use_custom_model": "Use custom model",
+    "sidebar.llm_label": "LLM model",
+    "sidebar.vlm_label": "VLM model",
+    "sidebar.llm_select_aria": "Select LLM model",
+    "sidebar.vlm_select_aria": "Select VLM model",
+    "sidebar.custom_llm_title": "Custom LLM",
+    "sidebar.custom_vlm_title": "Custom VLM",
+    "sidebar.custom_llm_box_aria": "Custom LLM settings",
+    "sidebar.custom_vlm_box_aria": "Custom VLM settings",
 
-    "sidebar.pexels_box_aria": "Configuración de Pexels",
+    "sidebar.pexels_box_aria": "Pexels API key settings",
     "sidebar.pexels_title": "Pexels",
-    "sidebar.pexels_mode_select_aria": "Seleccionar modo de clave Pexels",
-    "sidebar.pexels_default": "Usar configuración predeterminada",
-    "sidebar.pexels_custom": "Usar clave personalizada",
-    "sidebar.pexels_apikey_ph": "Pexels API Key",
-    "sidebar.pexels_hint": "Nota: La configuración predeterminada prioriza search_media.pexels_api_key del config.toml; si está vacío, se lee desde la variable de entorno.",
+    "sidebar.pexels_mode_select_aria": "Select Pexels key mode",
+    "sidebar.pexels_default": "Use default configuration",
+    "sidebar.pexels_custom": "Use custom key",
+    "sidebar.pexels_apikey_ph": "Pexels API key",
+    "sidebar.pexels_hint": "Note: default mode prefers config.toml (search_media.pexels_api_key). If empty, the tool will fall back to environment variables.",
 
-    "sidebar.help.cta": "Ver tutorial de configuración",
-    "sidebar.help.llm": "El LLM se usa principalmente para conversación, y también para generar guiones, agrupar clips y seleccionar música de fondo.",
-    "sidebar.help.vlm": "El VLM se usa para comprender material (imágenes/video). Confirma que el modelo soporte entrada multimodal.",
-    "sidebar.help.pexels": "Pexels se usa para buscar material en línea. Aviso legal: El material buscado proviene de Pexels y solo se usa para experimentar con ReelForge. No se permite redistribución ni venta. Solo proporcionamos la herramienta; el usuario es responsable del contenido generado y del cumplimiento de las licencias de Pexels.",
-    "sidebar.help.tts": "Se usa para generar locución a partir del guion.",
-    "sidebar.help.ai_transition": "Se usa para generar transiciones IA entre fragmentos.",
-    "sidebar.help.pexels_home_link": "Visitar sitio oficial de Pexels",
-    "sidebar.help.pexels_terms_link": "Ver términos de uso de Pexels",
+    "sidebar.help.cta": "Click to view the configuration guide",
+    "sidebar.help.llm": "LLM is used for chat/copywriting.",
+    "sidebar.help.vlm": "VLM is used for media understanding (image/video).",
+    "sidebar.help.pexels": "Pexels is used for media search.",
+    "sidebar.help.tts": "TTS is used to generate voiceover from text.",
+    "sidebar.help.ai_transition": "Used to generate AI transitions between clips.",
+    "sidebar.help.pexels_home_link": "Visit the official Pexels website",
+    "sidebar.help.pexels_terms_link": "View Pexels Terms",
 
     // common
-    "common.retry_after_suffix": " (reintentar en {seconds}s)",
+    "common.retry_after_suffix": " (retry in {seconds}s)",
 
     // toast
-    "toast.interrupt_failed": "Error al interrumpir: {msg}",
-    "toast.pending_limit": "Se alcanzó el límite de material pendiente ({max}). Envía o elimina antes de subir más.",
-    "toast.pending_limit_partial": "Puedes subir {remain} archivo(s) más (límite {max}). Solo se subirán los primeros {remain}.",
-    "toast.uploading": "Subiendo material… {pct}%{extra}",
-    "toast.uploading_file": "Subiendo ({i}/{n}): {name}… {pct}%{extra}",
-    "toast.upload_failed": "Error al subir: {msg}",
-    "toast.delete_failed": "Error al eliminar: {msg}",
-    "toast.uploading_cannot_send": "El material se está subiendo. Espera a que termine antes de enviar.",
-    "toast.switch_while_streaming": "Se está generando una respuesta. Espera o interrumpe antes de cambiar de conversación.",
-    "toast.uploading_interrupt_send": "El material se está subiendo. Se interrumpió la respuesta actual; presiona Enter cuando termine la subida.",
-    "toast.media_all_filtered": "Solo se admiten archivos de video o imagen.",
-    "toast.media_partial_filtered": "Se filtraron {n} archivo(s) no compatibles. Solo se subirán videos/imágenes.",
-    "toast.audio_not_supported": "Los archivos de audio aún no son compatibles (el backend no soporta procesamiento de audio).",
+    "toast.interrupt_failed": "Interrupt failed: {msg}",
+    "toast.pending_limit": "Pending media limit reached ({max}). Please send/delete before uploading more.",
+    "toast.pending_limit_partial": "You can upload at most {remain} more file(s) (limit {max}). Only the first {remain} will be uploaded.",
+    "toast.uploading": "Uploading media… {pct}%{extra}",
+    "toast.uploading_file": "Uploading ({i}/{n}): {name}… {pct}%{extra}",
+    "toast.upload_failed": "Upload failed: {msg}",
+    "toast.delete_failed": "Delete failed: {msg}",
+    "toast.uploading_cannot_send": "Media is uploading. Please wait until it finishes before sending.",
+    "toast.switch_while_streaming": "A reply is still being generated. Please wait or interrupt before switching chats.",
+    "toast.uploading_interrupt_send": "Media is uploading, so a new message can't be sent yet. I interrupted the current reply; press Enter after the upload finishes.",
+    "toast.media_all_filtered": "Only video or image files are supported.",
+    "toast.media_partial_filtered": "{n} unsupported file(s) were filtered; only video/image files will be uploaded.",
+    "toast.audio_not_supported": "Audio uploads are not supported yet (backend audio processing is not available).",
 
     // tools
-    "tool.card.default_name": "Llamada a herramienta",
-    "tool.card.fallback_name": "Herramienta MCP",
+    "tool.card.default_name": "Tool call",
+    "tool.card.fallback_name": "MCP Tool",
 
-    "tool.preview.render_title": "Vista previa del video",
-    "tool.preview.other_videos": "Otros videos (clic para vista previa)",
-    "tool.preview.videos": "Videos (clic para vista previa)",
-    "tool.preview.images": "Imágenes (clic para vista previa)",
+    "tool.preview.render_title": "Rendered preview",
+    "tool.preview.other_videos": "Other videos (click to preview)",
+    "tool.preview.videos": "Videos (click to preview)",
+    "tool.preview.images": "Images (click to preview)",
     "tool.preview.audio": "Audio",
-    "tool.preview.listen": "Escuchar",
-    "tool.preview.split_shots": "Resultado de división de planos (clic para vista previa)",
+    "tool.preview.listen": "Listen",
+    "tool.preview.split_shots": "Shot splitting results (click to preview)",
 
-    "tool.preview.btn_modal": "Vista previa en ventana",
-    "tool.preview.btn_open": "Abrir",
+    "tool.preview.btn_modal": "Open preview",
+    "tool.preview.btn_open": "Open",
 
-    "tool.preview.more_items": "{n} más sin mostrar",
-    "tool.preview.more_audios": "{n} audios más sin mostrar",
+    "tool.preview.more_items": "{n} more not shown",
+    "tool.preview.more_audios": "{n} more audio clip(s) not shown",
 
     "tool.preview.label.audio": "Audio {i}",
     "tool.preview.label.video": "Video {i}",
-    "tool.preview.label.image": "Imagen {i}",
-    "tool.preview.label.shot": "Plano {i}",
+    "tool.preview.label.image": "Image {i}",
+    "tool.preview.label.shot": "Shot {i}",
 
-    "preview.unsupported": "Vista previa no disponible para este tipo: ",
-    "preview.open_download": "Abrir/Descargar",
+    "preview.unsupported": "This type can't be previewed inline:",
+    "preview.open_download": "Open/Download",
   },
   en: {
     // topbar
@@ -272,7 +272,7 @@ const __OS_I18N = {
 function __osNormLang(x) {
   const s = String(x || "").trim().toLowerCase();
   if (s === "en" || s.startsWith("en-")) return "en";
-  return "zh";
+  return "en";
 }
 
 function __osLoadLang() {
@@ -297,7 +297,7 @@ function __osFormat(tpl, vars) {
 }
 
 function __t(key, vars) {
-  const lang = __osNormLang(window.OPENSTORYLINE_LANG || "zh");
+  const lang = __osNormLang(window.OPENSTORYLINE_LANG || "en");
   const table = __OS_I18N[lang] || __OS_I18N.zh;
   const raw = (table && table[key] != null) ? table[key] : (__OS_I18N.zh[key] ?? key);
   return __osFormat(raw, vars);
@@ -342,7 +342,7 @@ function __rerenderProviderFieldPlaceholders(root = document) {
 }
 
 function __osApplyHelpLinks(root = document) {
-  const lang = __osNormLang(window.OPENSTORYLINE_LANG || "zh");
+  const lang = __osNormLang(window.OPENSTORYLINE_LANG || "en");
   const nodes = (root || document).querySelectorAll(".sidebar-help[data-help-zh], .sidebar-help[data-help-en]");
 
   nodes.forEach((a) => {
@@ -354,7 +354,7 @@ function __osApplyHelpLinks(root = document) {
 }
 
 function __osApplyTooltipLinks(root = document) {
-  const lang = __osNormLang(window.OPENSTORYLINE_LANG || "zh");
+  const lang = __osNormLang(window.OPENSTORYLINE_LANG || "en");
 
   const nodes = (root || document).querySelectorAll(
     ".sidebar-help-tooltip-link[data-terms-zh], .sidebar-help-tooltip-link[data-terms-en], " +
@@ -435,7 +435,7 @@ function __osAppendToCurrentUrl(suffix) {
 }
 
 function __osApplyTopbarLinks(root = document) {
-  const lang = __osNormLang(window.OPENSTORYLINE_LANG || "zh");
+  const lang = __osNormLang(window.OPENSTORYLINE_LANG || "en");
   const nodes = (root || document).querySelectorAll(
     ".topbar-link[data-link-zh], .topbar-link[data-link-en], .topbar-link[data-link-suffix], .topbar-link[data-link-suffix-zh], .topbar-link[data-link-suffix-en]"
   );
@@ -482,7 +482,7 @@ function __applyLang(lang, { persist = true } = {}) {
 // init once
 (() => {
   const stored = __osLoadLang();
-  const initial = stored || __osNormLang(document.documentElement.lang || "zh");
+  const initial = stored || __osNormLang(document.documentElement.lang || "en");
   __applyLang(initial, { persist: stored != null }); // 有存储就保留；没存储就不写入
 })();
 
@@ -1215,7 +1215,7 @@ class ChatUI {
       if (typeof hit === "string") return String(hit);
 
       if (hit && typeof hit === "object") {
-        const lang = __osNormLang(window.OPENSTORYLINE_LANG || "zh");
+        const lang = __osNormLang(window.OPENSTORYLINE_LANG || "en");
         const v = hit[lang] ?? hit.zh ?? hit.en;
         if (v != null) return String(v);
       }
@@ -2030,7 +2030,7 @@ class ChatUI {
       return;
     }
 
-    const lang = __osNormLang(window.OPENSTORYLINE_LANG || "zh");
+    const lang = __osNormLang(window.OPENSTORYLINE_LANG || "en");
 
     let key = "";
     try {
@@ -2457,7 +2457,7 @@ class App {
     this._switchLockTimer = 0;
 
     this.langToggle = $("#langToggle");
-    this.lang = __osNormLang(window.OPENSTORYLINE_LANG || "zh");
+    this.lang = __osNormLang(window.OPENSTORYLINE_LANG || "en");
 
     this._langWasStored = (__osLoadLang() != null);
 
@@ -2578,7 +2578,7 @@ class App {
   }
 
   _newChatTitle() {
-    const lang = __osNormLang(this.lang || "zh");
+    const lang = __osNormLang(this.lang || "en");
     return (lang === "en") ? "New chat" : "Nueva conversación";
   }
 
@@ -2944,7 +2944,7 @@ class App {
     this._removeSessionFromHistory(sid);
     this._renderSessionHistory(this.sessionId);
 
-    const lang = __osNormLang(this.lang || "zh");
+    const lang = __osNormLang(this.lang || "en");
     const msg = (lang === "en")
       ? "This chat has expired or is no longer available and has been removed from history."
       : "Esta sesión ha expirado o no está disponible, y se ha eliminado del historial.";
@@ -3424,7 +3424,7 @@ class App {
   }
 
   _makeChatSendPayload(text, attachment_ids) {
-    const payload = { text, attachment_ids, lang: this.lang || "zh" };
+    const payload = { text, attachment_ids, lang: this.lang || "en" };
 
     if (this.llmModel) payload.llm_model = this.llmModel;
     if (this.vlmModel) payload.vlm_model = this.vlmModel;
@@ -3528,7 +3528,7 @@ class App {
     this._quickPromptIdx = idx + 1;
 
     const item = list[idx];
-    const lang = __osNormLang(this.lang || "zh");
+    const lang = __osNormLang(this.lang || "en");
 
     if (typeof item === "string") return item.trim();
     if (item && typeof item === "object") {
@@ -3614,7 +3614,7 @@ class App {
             return;
           }
 
-          const lang = __osNormLang(this.lang || "zh");
+          const lang = __osNormLang(this.lang || "en");
           const msg = (lang === "en")
             ? "Failed to load this chat for now. Please try again later."
             : "No se pudo cargar esta sesión. Inténtalo de nuevo más tarde.";
