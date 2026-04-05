@@ -7,6 +7,37 @@ export PYTHONPATH="$ROOT_DIR/src"
 HOST="${HOST:-0.0.0.0}"
 PORT="${PORT:-7860}"
 
+# Resolve Ollama host IP: use env var, or auto-detect Docker gateway
+if [ -z "$OLLAMA_HOST" ]; then
+  # Try host.docker.internal first (works on Docker Desktop / Mac / Windows)
+  if getent hosts host.docker.internal > /dev/null 2>&1; then
+    OLLAMA_HOST="host.docker.internal"
+  else
+    # Linux Docker: use the default gateway from ip route
+    OLLAMA_HOST=$(ip route show default 2>/dev/null | awk '/default/ {print $3}' | head -1)
+    # Fallback to common Docker bridge gateway
+    if [ -z "$OLLAMA_HOST" ]; then
+      OLLAMA_HOST="172.17.0.1"
+    fi
+  fi
+fi
+
+# Auto-build base URLs if not explicitly set
+if [ -z "$LLM_BASE_URL" ]; then
+  LLM_BASE_URL="http://${OLLAMA_HOST}:11434/v1"
+fi
+if [ -z "$VLM_BASE_URL" ]; then
+  VLM_BASE_URL="http://${OLLAMA_HOST}:11434/v1"
+fi
+
+export LLM_BASE_URL VLM_BASE_URL
+
+echo "=== Ollama Configuration ==="
+echo "OLLAMA_HOST: ${OLLAMA_HOST}"
+echo "LLM_BASE_URL: ${LLM_BASE_URL}"
+echo "VLM_BASE_URL: ${VLM_BASE_URL}"
+echo "==========================="
+
 # Inject Ollama config from environment variables into config.toml
 if [ -n "$LLM_MODEL" ] || [ -n "$VLM_MODEL" ]; then
   python3 -c "
