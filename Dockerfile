@@ -46,6 +46,16 @@ ENV PYTHONPATH=/app/src
 ENV HOST=0.0.0.0
 ENV PORT=7860
 
+# Ollama configuration
+ENV LLM_MODEL=minimax-m2.7:cloud
+ENV LLM_BASE_URL=http://host.docker.internal:11434/v1
+ENV LLM_API_KEY=ollama
+ENV LLM_TIMEOUT=300.0
+ENV VLM_MODEL=gemma4:31b-cloud
+ENV VLM_BASE_URL=http://host.docker.internal:11434/v1
+ENV VLM_API_KEY=ollama
+ENV VLM_TIMEOUT=600.0
+
 # 暴露端口
 EXPOSE 7860
 

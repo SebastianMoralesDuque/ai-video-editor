@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.storyline/
+outputs/
+resource/
+.git/
+node_modules/
+.env
+context.md
+*.md
+!.github/

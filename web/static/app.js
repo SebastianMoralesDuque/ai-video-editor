@@ -1,155 +1,155 @@
 // /static/app.js
 const $ = (sel) => document.querySelector(sel);
-const SIDEBAR_COLLAPSED_KEY = "openstoryline_sidebar_collapsed";
-const DEVBAR_COLLAPSED_KEY = "openstoryline_devbar_collapsed";
+const SIDEBAR_COLLAPSED_KEY = "reelforge_sidebar_collapsed";
+const DEVBAR_COLLAPSED_KEY = "reelforge_devbar_collapsed";
 const AUDIO_PREVIEW_MAX = 3;
 const CUSTOM_MODEL_KEY = "__custom__";
-const SESSION_ID_KEY = "openstoryline_session_id";
-const SESSION_LIST_KEY = "openstoryline_session_list_v1";
+const SESSION_ID_KEY = "reelforge_session_id";
+const SESSION_LIST_KEY = "reelforge_session_list_v1";
 
 // =========================================================
-// i18n (zh/en) + lang persistence
+// i18n (es/en) + lang persistence
 // =========================================================
-const __OS_LANG_STORAGE_KEY = "openstoryline_lang_v1";
+const __OS_LANG_STORAGE_KEY = "reelforge_lang_v1";
 
 const QUICK_PROMPTS = [
-  { zh: "详细介绍一下你能做什么", en: "Please describe in detail what you can do." },
-  { zh: "帮我找10个夏日海滩素材，剪一个欢快的旅行vlog", en: "Please help me find some summer beach footage and edit it into a 30-second travel vlog." },
-  { zh: "我准备长期批量做同类视频，先帮我剪一条示范成片；之后把这套偏好总结成可复用的剪辑风格 Skill。", en: "I plan to produce similar videos in batches over a long period. First, help me edit a sample video; then, help me summarize this set of preferences into a reusable editing style skill."},
-  { zh: "根据我的素材内容，仿照鲁迅文风生成文案。", en: "Based on my footage, please generate a Shakespearean-style video script."},
-  { zh: "帮我找一些中国春节相关素材，筛选出最有年味的场景，选择喜庆的 BGM", en: "Please help me find some materials related to Chinese New Year, filter out the most festive scenes, and choose celebratory background music."},
+  { zh: "Explícame en detalle qué puedes hacer", en: "Please describe in detail what you can do." },
+  { zh: "Busca 10 clips de playa y crea un vlog de viaje alegre", en: "Please help me find some summer beach footage and edit it into a 30-second travel vlog." },
+  { zh: "Quiero producir videos similares en serie. Crea un video de ejemplo y luego genera una plantilla reutilizable de edición.", en: "I plan to produce similar videos in batches over a long period. First, help me edit a sample video; then, help me summarize this set of preferences into a reusable editing style skill."},
+  { zh: "Genera un guion con estilo literario basado en mi material.", en: "Based on my footage, please generate a Shakespearean-style video script."},
+  { zh: "Busca material festivo, filtra las mejores escenas y elige música de fondo alegre.", en: "Please help me find some materials related to Chinese New Year, filter out the most festive scenes, and choose celebratory background music."},
 ];
 
 const __OS_I18N = {
   zh: {
     // topbar
-    "main.greeting": "🎬 你好，创作者",
-    "topbar.lang_title": "切换语言",
-    "topbar.lang_aria": "语言切换",
-    "topbar.lang_zh": "中",
+    "main.greeting": "🎬 Hola, creador",
+    "topbar.lang_title": "Cambiar idioma",
+    "topbar.lang_aria": "Selector de idioma",
+    "topbar.lang_zh": "ES",
     "topbar.lang_en": "EN",
-    "topbar.link1": "github 链接",
-    "topbar.link2": "使用手册",
-    "topbar.node_map": "节点地图",
+    "topbar.link1": "Enlace a GitHub",
+    "topbar.link2": "Guía de uso",
+    "topbar.node_map": "Mapa de nodos",
 
     // aria
-    "aria.sidebar": "侧边栏",
-    "aria.sidebar_scroll": "侧边栏滚动区",
-    "aria.sidebar_model_select": "对话模型选择",
-    "composer.placeholder": "提出任何剪辑需求（Enter 发送，shift + Enter 换行）",
-    "assistant.placeholder": "正在调用大模型中…",
-    "composer.quick_prompt": "插入提示语",
+    "aria.sidebar": "Panel lateral",
+    "aria.sidebar_scroll": "Zona de scroll del panel",
+    "aria.sidebar_model_select": "Selector de modelo de conversación",
+    "composer.placeholder": "Escribe cualquier instrucción de edición (Enter para enviar, Shift + Enter para nueva línea)",
+    "assistant.placeholder": "Llamando al modelo de lenguaje…",
+    "composer.quick_prompt": "Insertar sugerencia",
 
     // sidebar
-    "sidebar.toggle": "收起/展开侧边栏",
-    "sidebar.new_chat": "创建新对话",
-    "sidebar.history_title": "对话历史",
-    "sidebar.history_empty": "暂无历史会话",
-    "sidebar.history_aria": "历史会话列表",
-    "sidebar.model_label": "对话模型",
-    "sidebar.model_select_aria": "选择对话模型",
-    "sidebar.custom_model_box_aria": "自定义模型配置",
-    "sidebar.custom_model_title": "自定义模型",
-    "sidebar.custom_llm_subtitle": "LLM（对话/文案）",
-    "sidebar.custom_llm_model_ph": "模型名称，例如 deepseek-chat / gpt-4o-mini",
-    "sidebar.custom_llm_baseurl_ph": "Base URL，例如 https://api.xxx.com/v1",
+    "sidebar.toggle": "Colapsar/expandir panel lateral",
+    "sidebar.new_chat": "Nueva conversación",
+    "sidebar.history_title": "Historial",
+    "sidebar.history_empty": "No hay conversaciones anteriores",
+    "sidebar.history_aria": "Lista de historial de conversaciones",
+    "sidebar.model_label": "Modelo de conversación",
+    "sidebar.model_select_aria": "Seleccionar modelo de conversación",
+    "sidebar.custom_model_box_aria": "Configuración de modelo personalizado",
+    "sidebar.custom_model_title": "Modelo personalizado",
+    "sidebar.custom_llm_subtitle": "LLM (conversación/guion)",
+    "sidebar.custom_llm_model_ph": "Nombre del modelo, ej. gpt-4o-mini",
+    "sidebar.custom_llm_baseurl_ph": "Base URL, ej. https://api.ejemplo.com/v1",
     "sidebar.custom_llm_apikey_ph": "API Key",
-    "sidebar.custom_vlm_subtitle": "VLM（素材理解）",
-    "sidebar.custom_vlm_model_ph": "模型名称，例如 qwen-vl-plus / gpt-4o",
-    "sidebar.custom_vlm_baseurl_ph": "Base URL，例如 https://api.xxx.com/v1",
+    "sidebar.custom_vlm_subtitle": "VLM (comprensión de material)",
+    "sidebar.custom_vlm_model_ph": "Nombre del modelo, ej. gpt-4o",
+    "sidebar.custom_vlm_baseurl_ph": "Base URL, ej. https://api.ejemplo.com/v1",
     "sidebar.custom_vlm_apikey_ph": "API Key",
-    "sidebar.custom_hint": "提示：API Key 仅用于本会话的服务端调用；页面与 Tool trace 会自动脱敏，不会显示明文。",
-    "sidebar.tts_box_aria": "TTS 服务配置",
-    "sidebar.tts_title": "TTS 配置",
-    "sidebar.tts_provider_select_aria": "选择 TTS 服务厂家",
-    "sidebar.tts_default": "使用默认配置",
-    "sidebar.tts_hint": "提示：字段留空将使用 config.toml 中的配置。",
-    "sidebar.tts_field_suffix": "（留空则使用服务器默认）",
-    "sidebar.ai_transition_box_aria": "AI 转场服务配置",
-    "sidebar.ai_transition_title": "AI 转场配置",
-    "sidebar.ai_transition_provider_select_aria": "选择 AI 转场服务厂家",
-    "sidebar.ai_transition_default": "使用默认配置",
-    "sidebar.ai_transition_hint": "提示：字段填写不完整则将使用 config.toml 中的配置。",
-    "sidebar.ai_transition_warning_aria": "AI 转场资源消耗提示",
-    "sidebar.ai_transition_warning_title": "高资源消耗提示",
-    "sidebar.ai_transition_warning_body": "AI 转场会额外触发模型调用，资源消耗通常显著高于常规文案或配音流程，单条转场价格通常在0.5~4元之间，建议按需使用。",
-    "sidebar.use_custom_model": "使用自定义模型",
-    "sidebar.llm_label": "LLM 模型",
-    "sidebar.vlm_label": "VLM 模型",
-    "sidebar.llm_select_aria": "选择 LLM 模型",
-    "sidebar.vlm_select_aria": "选择 VLM 模型",
-    "sidebar.custom_llm_title": "LLM 自定义模型",
-    "sidebar.custom_vlm_title": "VLM 自定义模型",
-    "sidebar.custom_llm_box_aria": "LLM 自定义模型配置",
-    "sidebar.custom_vlm_box_aria": "VLM 自定义模型配置",
+    "sidebar.custom_hint": "Nota: La API Key solo se usa para llamadas del servidor en esta sesión; la página y el registro de herramientas la ocultan automáticamente.",
+    "sidebar.tts_box_aria": "Configuración de TTS",
+    "sidebar.tts_title": "Texto a voz (TTS)",
+    "sidebar.tts_provider_select_aria": "Seleccionar proveedor TTS",
+    "sidebar.tts_default": "Usar configuración predeterminada",
+    "sidebar.tts_hint": "Nota: Si los campos están vacíos, se usará la configuración de config.toml.",
+    "sidebar.tts_field_suffix": " (vacío = usar predeterminado del servidor)",
+    "sidebar.ai_transition_box_aria": "Configuración de transiciones IA",
+    "sidebar.ai_transition_title": "Transiciones IA",
+    "sidebar.ai_transition_provider_select_aria": "Seleccionar proveedor de transiciones IA",
+    "sidebar.ai_transition_default": "Usar configuración predeterminada",
+    "sidebar.ai_transition_hint": "Nota: Si los campos están incompletos, se usará la configuración de config.toml.",
+    "sidebar.ai_transition_warning_aria": "Aviso de consumo de recursos de transiciones IA",
+    "sidebar.ai_transition_warning_title": "Alto consumo de recursos",
+    "sidebar.ai_transition_warning_body": "Las transiciones IA requieren llamadas adicionales al modelo. El consumo de recursos suele ser significativamente mayor que en los procesos de guion o locución. Se recomienda usarlas solo cuando sea necesario.",
+    "sidebar.use_custom_model": "Usar modelo personalizado",
+    "sidebar.llm_label": "Modelo LLM",
+    "sidebar.vlm_label": "Modelo VLM",
+    "sidebar.llm_select_aria": "Seleccionar modelo LLM",
+    "sidebar.vlm_select_aria": "Seleccionar modelo VLM",
+    "sidebar.custom_llm_title": "LLM personalizado",
+    "sidebar.custom_vlm_title": "VLM personalizado",
+    "sidebar.custom_llm_box_aria": "Configuración de LLM personalizado",
+    "sidebar.custom_vlm_box_aria": "Configuración de VLM personalizado",
 
-    "sidebar.pexels_box_aria": "Pexels API Key 配置",
-    "sidebar.pexels_title": "Pexels 配置",
-    "sidebar.pexels_mode_select_aria": "选择 Pexels Key 模式",
-    "sidebar.pexels_default": "使用默认配置",
-    "sidebar.pexels_custom": "使用自定义 key",
+    "sidebar.pexels_box_aria": "Configuración de Pexels",
+    "sidebar.pexels_title": "Pexels",
+    "sidebar.pexels_mode_select_aria": "Seleccionar modo de clave Pexels",
+    "sidebar.pexels_default": "Usar configuración predeterminada",
+    "sidebar.pexels_custom": "Usar clave personalizada",
     "sidebar.pexels_apikey_ph": "Pexels API Key",
-    "sidebar.pexels_hint": "提示：默认配置会优先使用 config.toml 的 search_media.pexels_api_key；为空时工具内部会从环境变量读取。",
+    "sidebar.pexels_hint": "Nota: La configuración predeterminada prioriza search_media.pexels_api_key del config.toml; si está vacío, se lee desde la variable de entorno.",
 
-    "sidebar.help.cta": "点击查看配置教程",
-    "sidebar.help.llm": "LLM 主要用于对话，在工具内部也被用来生成文案/分组/选择BGM等。",
-    "sidebar.help.vlm": "VLM 用于素材理解（图像/视频理解）。自定义时请确认模型支持多模态输入。",
-    "sidebar.help.pexels": "Pexels 用于搜索网络素材。免责声明：OpenStoryline 搜索的网络素材均来自Pexels，通过Pexels下载的素材仅用于体验Open-Storyline剪辑效果，不允许再分发或出售。我们只提供工具，所有通过本工具下载和使用的素材（如 Pexels 图像）都由用户自行通过 API 获取，我们不对用户生成的视频内容、素材的合法性或因使用本工具导致的任何版权/肖像权纠纷承担责任。使用时请遵循 Pexels 的许可协议。",
-    "sidebar.help.tts": "用于从文案生成配音。",
-    "sidebar.help.ai_transition": "用于为片段之间生成 AI 转场。",
-    "sidebar.help.pexels_home_link": "点击进入 Pexels 官方网站",
-    "sidebar.help.pexels_terms_link": "查看 Pexels 用户协议",
+    "sidebar.help.cta": "Ver tutorial de configuración",
+    "sidebar.help.llm": "El LLM se usa principalmente para conversación, y también para generar guiones, agrupar clips y seleccionar música de fondo.",
+    "sidebar.help.vlm": "El VLM se usa para comprender material (imágenes/video). Confirma que el modelo soporte entrada multimodal.",
+    "sidebar.help.pexels": "Pexels se usa para buscar material en línea. Aviso legal: El material buscado proviene de Pexels y solo se usa para experimentar con ReelForge. No se permite redistribución ni venta. Solo proporcionamos la herramienta; el usuario es responsable del contenido generado y del cumplimiento de las licencias de Pexels.",
+    "sidebar.help.tts": "Se usa para generar locución a partir del guion.",
+    "sidebar.help.ai_transition": "Se usa para generar transiciones IA entre fragmentos.",
+    "sidebar.help.pexels_home_link": "Visitar sitio oficial de Pexels",
+    "sidebar.help.pexels_terms_link": "Ver términos de uso de Pexels",
 
     // common
-    "common.retry_after_suffix": "（{seconds}s后再试）",
+    "common.retry_after_suffix": " (reintentar en {seconds}s)",
 
     // toast
-    "toast.interrupt_failed": "打断失败：{msg}",
-    "toast.pending_limit": "待发送素材已达上限（{max} 个），请先发送/删除后再上传。",
-    "toast.pending_limit_partial": "最多还能上传 {remain} 个素材（上限 {max}）。将只上传前 {remain} 个。",
-    "toast.uploading": "正在上传素材中… {pct}%{extra}",
-    "toast.uploading_file": "正在上传素材（{i}/{n}）：{name}… {pct}%{extra}",
-    "toast.upload_failed": "上传失败：{msg}",
-    "toast.delete_failed": "删除失败：{msg}",
-    "toast.uploading_cannot_send": "素材正在上传中，上传完成后才能发送。",
-    "toast.switch_while_streaming": "正在生成回复，暂时无法切换会话。请先等待完成或打断当前回复。",
-    "toast.uploading_interrupt_send": "素材正在上传中，暂时无法发送新消息。已为你打断当前回复；上传完成后再按 Enter 发送。",
-    "toast.media_all_filtered": "仅支持上传视频或图片文件。",
-    "toast.media_partial_filtered": "已过滤 {n} 个不支持的文件类型，仅上传视频/图片。",
-    "toast.audio_not_supported": "暂不支持音频文件上传（后端尚未支持音频处理）。",
+    "toast.interrupt_failed": "Error al interrumpir: {msg}",
+    "toast.pending_limit": "Se alcanzó el límite de material pendiente ({max}). Envía o elimina antes de subir más.",
+    "toast.pending_limit_partial": "Puedes subir {remain} archivo(s) más (límite {max}). Solo se subirán los primeros {remain}.",
+    "toast.uploading": "Subiendo material… {pct}%{extra}",
+    "toast.uploading_file": "Subiendo ({i}/{n}): {name}… {pct}%{extra}",
+    "toast.upload_failed": "Error al subir: {msg}",
+    "toast.delete_failed": "Error al eliminar: {msg}",
+    "toast.uploading_cannot_send": "El material se está subiendo. Espera a que termine antes de enviar.",
+    "toast.switch_while_streaming": "Se está generando una respuesta. Espera o interrumpe antes de cambiar de conversación.",
+    "toast.uploading_interrupt_send": "El material se está subiendo. Se interrumpió la respuesta actual; presiona Enter cuando termine la subida.",
+    "toast.media_all_filtered": "Solo se admiten archivos de video o imagen.",
+    "toast.media_partial_filtered": "Se filtraron {n} archivo(s) no compatibles. Solo se subirán videos/imágenes.",
+    "toast.audio_not_supported": "Los archivos de audio aún no son compatibles (el backend no soporta procesamiento de audio).",
 
     // tools
-    "tool.card.default_name": "工具调用",
-    "tool.card.fallback_name": "MCP 工具",
+    "tool.card.default_name": "Llamada a herramienta",
+    "tool.card.fallback_name": "Herramienta MCP",
 
-    "tool.preview.render_title": "成片预览",
-    "tool.preview.other_videos": "其它视频（点击预览）",
-    "tool.preview.videos": "视频（点击预览）",
-    "tool.preview.images": "图片（点击预览）",
-    "tool.preview.audio": "音频",
-    "tool.preview.listen": "试听",
-    "tool.preview.split_shots": "镜头切分结果（点击预览）",
+    "tool.preview.render_title": "Vista previa del video",
+    "tool.preview.other_videos": "Otros videos (clic para vista previa)",
+    "tool.preview.videos": "Videos (clic para vista previa)",
+    "tool.preview.images": "Imágenes (clic para vista previa)",
+    "tool.preview.audio": "Audio",
+    "tool.preview.listen": "Escuchar",
+    "tool.preview.split_shots": "Resultado de división de planos (clic para vista previa)",
 
-    "tool.preview.btn_modal": "弹窗预览",
-    "tool.preview.btn_open": "打开",
+    "tool.preview.btn_modal": "Vista previa en ventana",
+    "tool.preview.btn_open": "Abrir",
 
-    "tool.preview.more_items": "还有 {n} 个未展示",
-    "tool.preview.more_audios": "还有 {n} 个音频未展示",
+    "tool.preview.more_items": "{n} más sin mostrar",
+    "tool.preview.more_audios": "{n} audios más sin mostrar",
 
-    "tool.preview.label.audio": "音频 {i}",
-    "tool.preview.label.video": "视频 {i}",
-    "tool.preview.label.image": "图片 {i}",
-    "tool.preview.label.shot": "镜头 {i}",
+    "tool.preview.label.audio": "Audio {i}",
+    "tool.preview.label.video": "Video {i}",
+    "tool.preview.label.image": "Imagen {i}",
+    "tool.preview.label.shot": "Plano {i}",
 
-    "preview.unsupported": "该类型暂不支持内嵌预览：",
-    "preview.open_download": "打开/下载",
+    "preview.unsupported": "Vista previa no disponible para este tipo: ",
+    "preview.open_download": "Abrir/Descargar",
   },
   en: {
     // topbar
     "main.greeting": "🎬 Hi, creator",
     "topbar.lang_title": "Switch language",
     "topbar.lang_aria": "Language switch",
-    "topbar.lang_zh": "中",
+    "topbar.lang_zh": "ES",
     "topbar.lang_en": "EN",
     "topbar.link1": "github link",
     "topbar.link2": "user guide",
@@ -217,7 +217,7 @@ const __OS_I18N = {
     "sidebar.help.cta": "Click to view the configuration guide",
     "sidebar.help.llm": "LLM is used for chat/copywriting.",
     "sidebar.help.vlm": "VLM is used for media understanding (image/video).",
-    "sidebar.help.pexels": "Pexels is used for media search. Disclaimer: The online content searched by OpenStoryline is all from Pexels. Footage downloaded via Pexels is for the sole purpose of experiencing Open-Storyline editing effects and may not be redistributed or sold. We only provide the tool. All materials downloaded and used through this tool (such as Pexels images) are obtained by the user through the API. We are not responsible for the legality of user-generated video content or materials, or for any copyright/portrait rights disputes arising from the use of this tool. Please comply with the Pexels license agreement when using it.",
+    "sidebar.help.pexels": "Pexels is used for media search. Disclaimer: The online content searched by ReelForge is all from Pexels. Footage downloaded via Pexels is for the sole purpose of experiencing ReelForge editing effects and may not be redistributed or sold. We only provide the tool. All materials downloaded and used through this tool (such as Pexels images) are obtained by the user through the API. We are not responsible for the legality of user-generated video content or materials, or for any copyright/portrait rights disputes arising from the use of this tool. Please comply with the Pexels license agreement when using it.",
     "sidebar.help.tts": "TTS is used to generate voiceover from text.",
     "sidebar.help.ai_transition": "Used to generate AI transitions between clips.",
     "sidebar.help.pexels_home_link": "Visit the official Pexels website",
@@ -1105,7 +1105,7 @@ class ChatUI {
     }
     const cur = this.currentAssistant;
     cur.rawText = (text ?? cur.rawText ?? "").trim();
-    this.setBubbleContent(cur.bubbleEl, cur.rawText || "（未生成最终答复）");
+    this.setBubbleContent(cur.bubbleEl, cur.rawText || "(Sin respuesta final)");
     this.currentAssistant = null;
     this.maybeAutoScroll(wasNearBottom, { behavior: "auto" });
   }
@@ -2579,13 +2579,13 @@ class App {
 
   _newChatTitle() {
     const lang = __osNormLang(this.lang || "zh");
-    return (lang === "en") ? "New chat" : "新对话";
+    return (lang === "en") ? "New chat" : "Nueva conversación";
   }
 
   _isNewChatTitle(title) {
     const t = String(title || "").trim();
     if (!t) return true;
-    return t === "新对话" || t === "New chat";
+    return t === "Nueva conversación" || t === "New chat";
   }
 
   _deriveSessionTitle(snapshot, fallbackId) {
@@ -2947,7 +2947,7 @@ class App {
     const lang = __osNormLang(this.lang || "zh");
     const msg = (lang === "en")
       ? "This chat has expired or is no longer available and has been removed from history."
-      : "该会话已失效或不可用，已从历史列表中移除。";
+      : "Esta sesión ha expirado o no está disponible, y se ha eliminado del historial.";
     if (this.ui && typeof this.ui.showToast === "function") {
       this.ui.showToast(msg);
       setTimeout(() => this.ui.hideToast(), 2000);
@@ -3149,12 +3149,12 @@ class App {
 
     if (this.streaming) {
       this.sendBtn.innerHTML = this._sendIconStop;
-      this.sendBtn.setAttribute("aria-label", "打断");
-      this.sendBtn.title = "打断";
+      this.sendBtn.setAttribute("aria-label", "Interrumpir");
+      this.sendBtn.title = "Interrumpir";
     } else {
       this.sendBtn.innerHTML = this._sendIconSend;
-      this.sendBtn.setAttribute("aria-label", "发送");
-      this.sendBtn.title = "发送";
+      this.sendBtn.setAttribute("aria-label", "Enviar");
+      this.sendBtn.title = "Enviar";
     }
   }
 
@@ -3617,7 +3617,7 @@ class App {
           const lang = __osNormLang(this.lang || "zh");
           const msg = (lang === "en")
             ? "Failed to load this chat for now. Please try again later."
-            : "暂时无法加载该会话，请稍后重试。";
+            : "No se pudo cargar esta sesión. Inténtalo de nuevo más tarde.";
           if (this.ui && typeof this.ui.showToast === "function") {
             this.ui.showToast(msg);
             setTimeout(() => this.ui.hideToast(), 2000);
@@ -4108,7 +4108,7 @@ class App {
       // - 有 partial：保留已输出内容，并追加错误说明
       // - 无 partial：直接显示错误
       const text = partial
-        ? `${partial}\n\n（发生错误：${msg}）`
+        ? `${partial}\n\n(Error: ${msg})`
         : `发生错误：${msg}`;
 
       this.ui.endAssistantTurn(text);
