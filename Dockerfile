@@ -46,7 +46,8 @@ ENV PYTHONPATH=/app/src
 ENV HOST=0.0.0.0
 ENV PORT=7860
 
-# Ollama configuration
+# Ollama configuration (same pattern as NeonRunner)
+ENV OLLAMA_HOST=host.docker.internal
 ENV LLM_MODEL=minimax-m2.7:cloud
 ENV LLM_BASE_URL=http://host.docker.internal:11434/v1
 ENV LLM_API_KEY=ollama
