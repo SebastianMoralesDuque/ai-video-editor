@@ -243,41 +243,15 @@
         </div>
 
         <div id="aiTransitionBox" class="sidebar-panel"
-            aria-label="AI transition configuration"
-            data-i18n-aria-label="sidebar.ai_transition_box_aria">
+            aria-label="Configuración de transiciones IA">
           <div class="sidebar-panel-title">
-            <span class="sidebar-panel-title-text" data-i18n="sidebar.ai_transition_title">AI Transition</span>
-
-            <a class="sidebar-help"
-              href="https://github.com/FireRedTeam/FireRed-OpenStoryline/blob/main/docs/source/en/api-key.md"
-              target="_blank" rel="noopener noreferrer"
-              data-help-zh="https://github.com/FireRedTeam/FireRed-OpenStoryline/blob/main/docs/source/zh/api-key.md"
-              data-help-en="https://github.com/FireRedTeam/FireRed-OpenStoryline/blob/main/docs/source/en/api-key.md"
-              data-i18n-aria-label="sidebar.help_aria">
-              <span class="sidebar-help-icon" aria-hidden="true">?</span>
-              <span class="sidebar-help-tooltip" role="tooltip">
-                <span class="sidebar-help-tooltip-body" data-i18n="sidebar.help.ai_transition"></span>
-                <span class="sidebar-help-tooltip-cta" data-i18n="sidebar.help.cta">Click to view the configuration guide</span>
-              </span>
-            </a>
+            <span class="sidebar-panel-title-text">Transición IA</span>
           </div>
 
           <select id="aiTransitionProviderSelect"
                   class="sidebar-model-select"
-                  aria-label="Select AI transition provider"
-                  data-i18n-aria-label="sidebar.ai_transition_provider_select_aria"
+                  aria-label="Seleccionar proveedor de transiciones IA"
                   data-os-persist="sidebar.ai_transition.provider"></select>
-
-          <div class="sidebar-hint" data-i18n="sidebar.ai_transition_hint">
-            Note: If fields are incomplete, config.toml settings will be used.
-          </div>
-
-          <div class="sidebar-warning" role="note" data-i18n-aria-label="sidebar.ai_transition_warning_aria">
-            <span class="sidebar-warning-title" data-i18n="sidebar.ai_transition_warning_title">Higher resource usage</span>
-            <span class="sidebar-warning-body" data-i18n="sidebar.ai_transition_warning_body">
-              AI transitions trigger additional model calls and usually consume significantly more resources than regular copywriting or voiceover workflows. Use only when necessary.
-            </span>
-          </div>
 
           <div id="aiTransitionProviderFields"></div>
         </div>
