@@ -1,0 +1,12 @@
+services:
+  ai-video-editor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7860:7860"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - OLLAMA_HOST=host.docker.internal
+    restart: unless-stopped
