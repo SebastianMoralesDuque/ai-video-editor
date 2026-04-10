@@ -18,6 +18,7 @@ RUN pip install --no-cache-dir --upgrade langgraph
 # 复制项目文件
 COPY src/ ./src/
 COPY agent_fastapi.py .
+COPY ollama_cloud_proxy.py .
 COPY cli.py .
 COPY config.toml .
 COPY web/ ./web/
@@ -46,14 +47,15 @@ ENV PYTHONPATH=/app/src
 ENV HOST=0.0.0.0
 ENV PORT=7860
 
-# Ollama configuration (same pattern as NeonRunner)
-ENV OLLAMA_HOST=host.docker.internal
+# Ollama Cloud configuration
+ENV OLLAMA_API_KEY=""
+ENV OLLAMA_CLOUD_URL=https://ollama.com
 ENV LLM_MODEL=minimax-m2.7:cloud
-ENV LLM_BASE_URL=http://host.docker.internal:11434/v1
+ENV LLM_BASE_URL=http://127.0.0.1:11434/v1
 ENV LLM_API_KEY=ollama
 ENV LLM_TIMEOUT=300.0
 ENV VLM_MODEL=gemma4:31b-cloud
-ENV VLM_BASE_URL=http://host.docker.internal:11434/v1
+ENV VLM_BASE_URL=http://127.0.0.1:11434/v1
 ENV VLM_API_KEY=ollama
 ENV VLM_TIMEOUT=600.0
 

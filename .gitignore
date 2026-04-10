@@ -63,7 +63,8 @@ checkpoints/
 models/
 project/
 
-# 环境/配置的敏感信息（你如果用 .env 管 secret）
+# 环境/配置的敏感信息
+.env
 .env.local
 .env.*.local
 

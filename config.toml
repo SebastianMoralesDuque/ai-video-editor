@@ -12,7 +12,7 @@ outputs_dir = "./outputs"
 # ============= 模型配置 for user / Model Config for User =============
 [llm]
 model = "minimax-m2.7:cloud"
-base_url = "http://host.docker.internal:11434/v1"
+base_url = "http://127.0.0.1:11434/v1"
 api_key = "ollama"
 timeout = 300.0
 temperature = 0.1
@@ -20,7 +20,7 @@ max_retries = 2
 
 [vlm]
 model = "gemma4:31b-cloud"
-base_url = "http://host.docker.internal:11434/v1"
+base_url = "http://127.0.0.1:11434/v1"
 api_key = "ollama"
 timeout = 600.0
 temperature = 0.1

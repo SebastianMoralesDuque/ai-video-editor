@@ -5,10 +5,10 @@ services:
       dockerfile: Dockerfile
     expose:
       - "7860"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     environment:
-      - OLLAMA_HOST=host.docker.internal
+      - OLLAMA_API_KEY=${OLLAMA_API_KEY}
+      - LLM_MODEL=${LLM_MODEL:-minimax-m2.7:cloud}
+      - VLM_MODEL=${VLM_MODEL:-gemma4:31b-cloud}
     labels:
       - traefik.enable=true
       - traefik.http.routers.ai-video-editor.rule=Host(`ai-video-editor.sebastianmorales.sbs`)
