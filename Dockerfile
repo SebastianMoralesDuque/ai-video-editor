@@ -22,6 +22,7 @@ RUN conda init bash && \
 
 COPY requirements.txt .
 COPY download.sh .
+COPY .storyline/skills/ .storyline/skills/
 
 RUN bash download.sh
 
@@ -37,9 +38,6 @@ COPY config.toml .
 COPY web/ ./web/
 COPY prompts/ ./prompts/
 COPY run.sh .
-
-# Copiar skills desde el repo local
-COPY .storyline/ .storyline/
 
 RUN mkdir -p .storyline .storyline/skills resource outputs/media
 

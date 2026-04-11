@@ -10,3 +10,5 @@ node_modules/
 context.md
 *.md
 !.github/
+
+# But allow .storyline/skills/ for build (will be added in Dockerfile after download.sh)
