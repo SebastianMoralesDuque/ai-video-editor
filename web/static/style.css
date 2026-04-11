@@ -689,6 +689,27 @@ body.sidebar-collapsed .sidebar-scroll{
   letter-spacing: 0;
 }
 
+.topbar .based{
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  color: var(--muted);
+
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.topbar .based a{
+  color: var(--link);
+  text-decoration: none;
+}
+
+.topbar .based a:hover{
+  text-decoration: underline;
+}
+
 .topbar .actions{
   margin-left: auto;
   display: flex;

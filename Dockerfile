@@ -26,7 +26,7 @@ COPY prompts/ ./prompts/
 COPY run.sh .
 
 # 创建必要目录
-RUN mkdir -p .storyline resource outputs/media
+RUN mkdir -p .storyline .storyline/skills resource outputs/media
 
 # 下载模型和资源
 RUN wget -q "https://image-url-2-feature-1251524319.cos.ap-shanghai.myqcloud.com/openstoryline/models.zip" -O .storyline/models.zip \

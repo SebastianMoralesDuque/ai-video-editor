@@ -4109,7 +4109,7 @@ class App {
       // - 无 partial：直接显示错误
       const text = partial
         ? `${partial}\n\n(Error: ${msg})`
-        : `发生错误：${msg}`;
+        : `Error: ${msg}`;
 
       this.ui.endAssistantTurn(text);
       return;
