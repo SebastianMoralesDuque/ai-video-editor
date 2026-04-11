@@ -1,14 +1,13 @@
 .venv/
 __pycache__/
 *.pyc
-.storyline/
+.storyline/models/
+.storyline/resource/
+.storyline/.server_cache/
 outputs/
-resource/
 .git/
 node_modules/
 .env
 context.md
 *.md
 !.github/
-
-# But allow .storyline/skills/ for build (will be added in Dockerfile after download.sh)

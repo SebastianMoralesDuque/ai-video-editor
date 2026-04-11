@@ -22,7 +22,6 @@ RUN conda init bash && \
 
 COPY requirements.txt .
 COPY download.sh .
-COPY .storyline/skills/ .storyline/skills/
 
 RUN bash download.sh
 
