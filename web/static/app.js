@@ -700,15 +700,22 @@ class WsClient {
       
       if (this._closedByUser) return;
 
-      // session 不存在就不要重连
+      // session no existe - no reconectar, notificar para crear nueva sesión
       if (ev && ev.code === 4404) {
         localStorage.removeItem(SESSION_ID_KEY);
-        location.reload();
+        if (this.onEvent) {
+          this.onEvent({ type: "session_not_found", data: { sessionId: this._extractSessionId() } });
+        }
         return;
       }
 
       setTimeout(() => this.connect(), 1000);
     };
+  }
+
+  _extractSessionId() {
+    const match = this.url.match(/\/ws\/sessions\/([^/]+)\/chat/);
+    return match ? match[1] : null;
   }
 
   close() {
@@ -3995,6 +4002,13 @@ class App {
 
   onWsEvent(evt) {
     const { type, data } = evt || {};
+    
+    // Session no encontrada - crear nueva
+    if (type === "session_not_found") {
+      this.newSession();
+      return;
+    }
+    
     if (type === "session.snapshot") {
       this._applySnapshotToCurrentSession(data || {}, { replayHistory: true });
       if (this._snapshotTurnRunning(data)) {
