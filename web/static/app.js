@@ -2530,6 +2530,7 @@ class App {
         return;
       } catch (err) {
         // Limpiar cualquier error de sesión y crear nueva sin recargar
+        console.log("[session] Session recovery failed, creating new session:", err.status);
         localStorage.removeItem(SESSION_ID_KEY);
         this._removeSessionFromHistory(saved);
       }
@@ -4003,8 +4004,9 @@ class App {
   onWsEvent(evt) {
     const { type, data } = evt || {};
     
-    // Session no encontrada - crear nueva
+    // Session no encontrada - crear nueva sin mostrar error
     if (type === "session_not_found") {
+      console.log("[session] Session not found on server, creating new one");
       this.newSession();
       return;
     }
