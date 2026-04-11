@@ -14,9 +14,12 @@ from open_storyline.nodes.core_nodes.base_node import BaseNode
 from open_storyline.nodes.node_summary import NodeSummary
 from open_storyline.nodes.node_state import NodeState
 from src.open_storyline.storage.agent_memory import ArtifactStore
+from open_storyline.utils.logging import get_logger
 
 from mcp.server.fastmcp import Context, FastMCP
 from mcp.server.session import ServerSession
+
+logger = get_logger(__name__)
 
 def create_tool_wrapper(node: BaseNode, input_schema: type[BaseModel]):
     """
@@ -26,10 +29,15 @@ def create_tool_wrapper(node: BaseNode, input_schema: type[BaseModel]):
     meta = node.meta if hasattr(node, 'meta') else None
 
     async def wrapper(mcp_ctx: Context, **kwargs) -> dict:
+        tool_name = meta.name if meta else "unknown"
+        logger.info(f"[MCP TOOL CALL] Starting tool: {tool_name}")
+        logger.info(f"[MCP TOOL CALL] kwargs: {kwargs}")
+        
         # 1. Unified handling of context and Session
         request = mcp_ctx.request_context.request
         headers = request.headers
         session_id = headers.get('X-Storyline-Session-Id')
+        logger.info(f"[MCP TOOL CALL] session_id: {session_id}")
         
         # 2. Session lifecycle management
         session_manager = mcp_ctx.request_context.lifespan_context
@@ -39,8 +47,10 @@ def create_tool_wrapper(node: BaseNode, input_schema: type[BaseModel]):
         # 3. Construct parameters
         # Note: FastMCP automatically injects parameters into kwargs, merge them here
         req_json = await request.json()
+        logger.info(f"[MCP TOOL CALL] request json: {req_json}")
         params = kwargs.copy()
         params.update(req_json.get('params', {}).get('arguments', {}))
+        logger.info(f"[MCP TOOL CALL] merged params: {params}")
 
         node_state = NodeState(
             session_id=session_id,
@@ -50,8 +60,14 @@ def create_tool_wrapper(node: BaseNode, input_schema: type[BaseModel]):
             llm=make_llm(mcp_ctx),
             mcp_ctx=mcp_ctx,
         )
-        result = await node(node_state, **params)
-        return result
+        try:
+            result = await node(node_state, **params)
+            logger.info(f"[MCP TOOL CALL] Tool {tool_name} completed successfully")
+            return result
+        except Exception as e:
+            logger.error(f"[MCP TOOL CALL] Tool {tool_name} failed: {type(e).__name__}: {e}")
+            logger.error(f"[MCP TOOL CALL] Traceback: {traceback.format_exc()}")
+            raise
 
 
     new_params = []
