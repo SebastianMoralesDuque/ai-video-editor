@@ -236,6 +236,8 @@ async def build_agent(
     logger.info("[AGENT] Fetching tools from MCP server...")
     tools = await client.get_tools()
     logger.info(f"[AGENT] Got {len(tools)} tools: {[t.name for t in tools]}")
+    skills = await load_skills(cfg.skills.skill_dir) # Load skills
+    node_manager = NodeManager(tools)
 
     # 4) Use LangChain's agent runtime to handle the multi-turn tool calling loop
     agent = create_agent(
