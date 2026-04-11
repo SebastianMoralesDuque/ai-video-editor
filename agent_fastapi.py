@@ -1060,7 +1060,7 @@ class ChatSession:
     def __init__(self, session_id: str, cfg: Settings):
         self.session_id = session_id
         self.cfg = cfg
-        self.lang = "zh"
+        self.lang = "en"
 
         default_llm = _peek_builtin_model_name("llm", self.cfg)
         default_vlm = _peek_builtin_model_name("vlm", self.cfg)
@@ -1601,8 +1601,8 @@ _PROVIDER_UI_META_KEYS = {
 
 _PROVIDER_UI_LABEL_OVERRIDES = {
     "302": "302.AI",
-    "bytedance": "字节跳动 ByteDance",
-    "dashscope": "阿里万相 Wan",
+    "bytedance": "ByteDance",
+    "dashscope": "Alibaba Wan",
 }
 
 _PROVIDER_UI_LABEL_OVERRIDES_BY_SECTION = {
@@ -1610,7 +1610,7 @@ _PROVIDER_UI_LABEL_OVERRIDES_BY_SECTION = {
         "minimax": "MiniMax",
     },
     "generate_ai_transition": {
-        "minimax": "MiniMax 海螺 (Hailuo)",
+        "minimax": "MiniMax Hailuo",
     },
 }
 

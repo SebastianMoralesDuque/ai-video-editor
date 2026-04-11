@@ -63,6 +63,18 @@ checkpoints/
 models/
 project/
 
+# Storyline generated content (downloaded at runtime)
+.storyline/models/
+.storyline/resource/
+.storyline/models.zip
+.storyline/resource.zip
+
+# Backup files
+config.toml.bak
+
+# Deployment instructions
+instructions-deploy-vps.md
+
 # 环境/配置的敏感信息
 .env
 .env.local

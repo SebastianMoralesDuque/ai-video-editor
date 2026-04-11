@@ -29,12 +29,12 @@ class PromptBuilder:
         self._cache[cache_key] = content
         return content
     
-    def render(self, task: str, role: str, lang: str = "zh", **variables: Any) -> str:
+    def render(self, task: str, role: str, lang: str = "en", **variables: Any) -> str:
         """Render single template"""
         template = self._load_template(task, role, lang)
         return re.sub(r"{{(.*?)}}", lambda m: str(variables[m.group(1)]), template)
     
-    def build(self, task: str, lang: str = "zh", **user_vars: Any) -> Dict[str, str]:
+    def build(self, task: str, lang: str = "en", **user_vars: Any) -> Dict[str, str]:
         """
         Build a complete prompt pair
         
@@ -63,7 +63,7 @@ class PromptBuilder:
 _builder = PromptBuilder()
 
 
-def get_prompt(name: str, lang: str = "zh", **kwargs:Any) -> str:
+def get_prompt(name: str, lang: str = "en", **kwargs:Any) -> str:
     """
     获取单个 prompt
     
@@ -84,7 +84,7 @@ def get_prompt(name: str, lang: str = "zh", **kwargs:Any) -> str:
     return _builder.render(task, role, lang, **kwargs)
 
 
-def build_prompts(task: str, lang: str = "zh", **user_vars: Any) -> Dict[str, str]:
+def build_prompts(task: str, lang: str = "en", **user_vars: Any) -> Dict[str, str]:
     """
     Get a single prompt.
     

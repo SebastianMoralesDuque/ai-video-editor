@@ -45,7 +45,7 @@ def create_tool_wrapper(node: BaseNode, input_schema: type[BaseModel]):
         node_state = NodeState(
             session_id=session_id,
             artifact_id=params['artifact_id'],
-            lang=params.get('lang', 'zh'),
+            lang=params.get('lang', 'en'),
             node_summary=NodeSummary(),
             llm=make_llm(mcp_ctx),
             mcp_ctx=mcp_ctx,
