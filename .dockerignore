@@ -1,9 +1,10 @@
 .venv/
 __pycache__/
 *.pyc
-.storyline/
+.storyline/models/
+.storyline/resource/
+.storyline/.server_cache/
 outputs/
-resource/
 .git/
 node_modules/
 .env

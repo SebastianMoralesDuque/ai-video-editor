@@ -2263,7 +2263,7 @@ async def ws_chat(ws: WebSocket, session_id: str):
                     data = (req.get("data") or {})
                     lang = (data.get("lang") or "").strip().lower()
                     if lang not in ("zh", "en"):
-                        lang = "zh"
+                        lang = "en"
 
                     sess.lang = lang
                     if sess.client_context:

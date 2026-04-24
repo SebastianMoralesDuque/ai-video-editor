@@ -700,15 +700,22 @@ class WsClient {
       
       if (this._closedByUser) return;
 
-      // session 不存在就不要重连
+      // session no existe - no reconectar, notificar para crear nueva sesión
       if (ev && ev.code === 4404) {
         localStorage.removeItem(SESSION_ID_KEY);
-        location.reload();
+        if (this.onEvent) {
+          this.onEvent({ type: "session_not_found", data: { sessionId: this._extractSessionId() } });
+        }
         return;
       }
 
       setTimeout(() => this.connect(), 1000);
     };
+  }
+
+  _extractSessionId() {
+    const match = this.url.match(/\/ws\/sessions\/([^/]+)\/chat/);
+    return match ? match[1] : null;
   }
 
   close() {
@@ -2522,14 +2529,10 @@ class App {
         await this.useSession(saved, snap);
         return;
       } catch (err) {
-        // 仅当明确 404（会话不存在）时才清理本地记录；其它错误（例如网络抖动）不要误删
-        if (err && err.status === 404) {
-          localStorage.removeItem(SESSION_ID_KEY);
-          this._removeSessionFromHistory(saved);
-          this._renderSessionHistory();
-        } else {
-          console.warn("[session] failed to restore saved session (non-404), keep local record:", saved, err);
-        }
+        // Limpiar cualquier error de sesión y crear nueva sin recargar
+        console.log("[session] Session recovery failed, creating new session:", err.status);
+        localStorage.removeItem(SESSION_ID_KEY);
+        this._removeSessionFromHistory(saved);
       }
     }
 
@@ -3954,10 +3957,9 @@ class App {
         return;
       } catch (e) {
         console.warn("[session] failed to reuse blank session, will create new one:", e);
-        // 仅当明确 404 时才清理本地记录；其它错误不要误删
+        // Limpiar cualquier sesión que ya no existe en el servidor
         if (e && e.status === 404) {
           this._removeSessionFromHistory(blankId);
-          this._renderSessionHistory(this.sessionId);
         }
       }
     }
@@ -4001,6 +4003,14 @@ class App {
 
   onWsEvent(evt) {
     const { type, data } = evt || {};
+    
+    // Session no encontrada - crear nueva sin mostrar error
+    if (type === "session_not_found") {
+      console.log("[session] Session not found on server, creating new one");
+      this.newSession();
+      return;
+    }
+    
     if (type === "session.snapshot") {
       this._applySnapshotToCurrentSession(data || {}, { replayHistory: true });
       if (this._snapshotTurnRunning(data)) {
