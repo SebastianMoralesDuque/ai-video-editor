@@ -27,6 +27,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s] %(levelna
 
 OLLAMA_API_KEY = os.environ.get("OLLAMA_API_KEY", "")
 OLLAMA_CLOUD_URL = (os.environ.get("OLLAMA_CLOUD_URL") or "https://ollama.com").rstrip("/")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "minimax-m2.7:cloud")
 PROXY_HOST = os.environ.get("PROXY_HOST", "127.0.0.1")
 PROXY_PORT = int(os.environ.get("PROXY_PORT", "11434"))
 
@@ -78,7 +79,7 @@ def _openai_to_ollama(body: dict[str, Any]) -> dict[str, Any]:
             ollama_messages.append({"role": role, "content": str(content)})
 
     ollama_body: dict[str, Any] = {
-        "model": body.get("model", "minimax-m2.7:cloud"),
+        "model": body.get("model", OLLAMA_MODEL),
         "messages": ollama_messages,
         "stream": bool(body.get("stream", False)),
     }
@@ -129,7 +130,7 @@ def _ollama_to_openai_response(data: dict[str, Any], model: str) -> dict[str, An
 async def chat_completions(request: Request):
     body = await request.json()
     stream = bool(body.get("stream", False))
-    model = body.get("model", "minimax-m2.7:cloud")
+    model = body.get("model", OLLAMA_MODEL)
 
     ollama_body = _openai_to_ollama(body)
 

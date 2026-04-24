@@ -13,7 +13,7 @@ outputs_dir = "./outputs"
 [llm]
 model = "minimax-m2.7:cloud"
 base_url = "https://ollama.com/v1"
-api_key = "3044320f10f44f85bb6c9d2796f2f608.iKQh-0RxUOdZj3l7DMiu9osc"
+api_key = ""
 timeout = 300.0
 temperature = 0.1
 max_retries = 2
@@ -21,7 +21,7 @@ max_retries = 2
 [vlm]
 model = "gemma4:31b-cloud"
 base_url = "https://ollama.com/v1"
-api_key = "3044320f10f44f85bb6c9d2796f2f608.iKQh-0RxUOdZj3l7DMiu9osc"
+api_key = ""
 timeout = 600.0
 temperature = 0.1
 max_retries = 2

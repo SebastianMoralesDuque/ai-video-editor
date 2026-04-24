@@ -19,6 +19,9 @@ if [ -z "$OLLAMA_API_KEY" ]; then
   exit 1
 fi
 
+# Ensure OLLAMA_MODEL is set (used by ollama_cloud_proxy.py)
+export OLLAMA_MODEL="${OLLAMA_MODEL:-${LLM_MODEL:-minimax-m2.7:cloud}}"
+
 echo "=== Starting Ollama Cloud Proxy ==="
 echo "  OLLAMA_CLOUD_URL: ${OLLAMA_CLOUD_URL:-https://ollama.com}"
 echo "  PROXY_HOST: ${PROXY_HOST}"
