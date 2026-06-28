@@ -1730,7 +1730,18 @@ def _build_provider_ui_schema_from_config(config_path: str, section_name: str) -
 async def index():
     if not os.path.exists(INDEX_HTML):
         return Response("index.html not found. Put it under ./web/index.html", media_type="text/plain", status_code=404)
-    return FileResponse(INDEX_HTML, media_type="text/html")
+    
+    # Read index.html and replace Umami placeholders with environment variables
+    with open(INDEX_HTML, 'r') as f:
+        html = f.read()
+    
+    umami_website_id = os.environ.get('UMAMI_WEBSITE_ID', '4e8b5d4a-a518-4559-b490-9c585faba6ea')
+    umami_script_url = os.environ.get('UMAMI_SCRIPT_URL', 'https://analytics.sebastianmorales.sbs/script.js')
+    
+    html = html.replace('__UMAMI_WEBSITE_ID__', umami_website_id)
+    html = html.replace('__UMAMI_SCRIPT_URL__', umami_script_url)
+    
+    return Response(html, media_type="text/html")
 
 @app.get("/node-map")
 async def node_map():

@@ -55,4 +55,7 @@ ENV OLLAMA_MODEL=$LLM_MODEL
 
 EXPOSE 7860
 
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:7860/ || exit 1
+
 CMD ["bash", "run.sh"]

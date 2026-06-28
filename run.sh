@@ -92,6 +92,7 @@ fi
 python -m open_storyline.mcp.server &
 MCP_PID=$!
 
+# Run uvicorn in foreground so bash exits if it dies
 uvicorn agent_fastapi:app \
   --host "$HOST" \
   --port "$PORT" &
@@ -99,4 +100,5 @@ WEB_PID=$!
 
 trap 'kill $PROXY_PID $MCP_PID $WEB_PID' INT TERM
 
-wait
+# Wait for any background job; if one exits, bash exits so Docker can restart the container
+wait -n
